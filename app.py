@@ -71,16 +71,6 @@ from visualization import (
     plotly_to_html,
 )
 
-# ── Logging ───────────────────────────────────────────────────────────────────
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler(ROOT / "logs" / "app.log", encoding="utf-8"),
-    ],
-)
-logger = logging.getLogger("app")
 
 # ── Config ────────────────────────────────────────────────────────────────────
 @st.cache_data
