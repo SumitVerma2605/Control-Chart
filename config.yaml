@@ -1,0 +1,62 @@
+# ============================================================
+# Data Analysis System - Configuration
+# ============================================================
+
+app:
+  title: "DataFlow Analytics"
+  version: "1.0.0"
+  theme: "dark"
+  cache_ttl: 3600          # seconds
+
+data:
+  max_upload_size_mb: 200
+  supported_formats: ["csv", "xlsx", "xls"]
+  sample_size: 10000       # rows for preview
+
+preprocessing:
+  missing_value_strategy: "mean"   # mean | median | drop | mode
+  outlier_method: "iqr"            # iqr | zscore
+  outlier_threshold: 1.5           # IQR multiplier or Z-score cutoff
+  normalize_method: "standard"     # standard | minmax | robust
+  encode_method: "onehot"          # onehot | label
+  datetime_formats:
+    - "%Y-%m-%d"
+    - "%d/%m/%Y"
+    - "%m/%d/%Y"
+    - "%Y-%m-%d %H:%M:%S"
+    - "%d-%m-%Y"
+
+eda:
+  max_categories: 20       # max unique values for categorical detection
+  hist_bins: 30
+  kde_bandwidth: "scott"   # scott | silverman
+  correlation_method: "pearson"   # pearson | spearman | kendall
+
+control_charts:
+  min_subgroup_size: 2
+  detection_runs_rule: 8         # consecutive points same side
+  detection_trend_rule: 6        # consecutive ascending/descending
+  sigma_level: 3                 # control limit sigma multiplier
+  chart_types:
+    - "X-bar & R"
+    - "X-bar & S"
+    - "Individuals (I-MR)"
+    - "P Chart"
+    - "C Chart"
+
+modeling:
+  test_size: 0.2
+  cv_folds: 5
+  random_state: 42
+  regression_models:
+    - "Linear Regression"
+    - "Random Forest Regressor"
+  classification_models:
+    - "Logistic Regression"
+    - "Random Forest Classifier"
+    - "XGBoost"
+
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+  format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
